@@ -1,0 +1,105 @@
+<aura:component >
+    <aura:attribute name="aw" type="Object" />
+    <aura:attribute name="actions" type="List" />
+    <aura:attribute name="frequency" type="List" />
+    <aura:attribute name="childObjects" type="Object[]" />
+    <aura:attribute name="filterWrapper" type="Object[]" />
+    <aura:attribute name="relFilterWrapper" type="Object[]" />
+    <aura:attribute name="fields" type="List" />
+    <aura:attribute name="relFields" type="List" />
+    <aura:attribute name="refFields" type="List" />
+    <aura:attribute name="refObjFields" type="List" />
+    <aura:attribute name="dispUpdRec" type="Boolean" />
+    <aura:handler name="init" action="{!c.myAction}" value="{!this}" />
+    <aura:registerEvent name="getRelObjs" type="c:AddFilters"/>
+    <aura:registerEvent name="getRelFilWrap" type="c:AddFilters"/>
+    <aura:registerEvent name="removeActItem" type="c:AddFilters"/>
+    
+    <fieldset class="slds-table slds-box slds-theme--default slds-container--large" style="max-width:80%">
+        <legend id="newaccountform" class="slds-text-heading--small slds-p-vertical--x-large" style="margin-bottom:-30px"> Action {!v.aw.lineNumber}</legend>
+        <div style="float:right;margin-top:-40px;margin-right:-27px;margin-left:600px;" onclick="{!c.removeAction}">
+            <lightning:icon iconName="utility:clear" size="small"/>
+        </div>
+        <thead>
+            <tr>
+                <th >Schedule Date time</th>
+                <div class="divider"/>
+                <td><ui:inputDateTime class="field" value="{!v.aw.filterDate}" displayDatePicker="true"/></td>
+            </tr>
+        </thead>
+        <thead>
+            <tr>
+                <th >Frequency</th>
+                <div class="divider"/>
+                <td><ui:inputSelect class="slds-text-title--caps" options="{!v.frequency}" value="{!v.aw.selectedFrequency}"/></td>
+            </tr>
+        </thead>
+        <thead>
+            <tr>
+                <th >Occurrence</th>
+                <div class="divider"/>
+                <td><ui:inputNumber class="field" format="#00#" value="{!v.aw.occurrence}"/></td>
+            </tr>
+        </thead>
+        <thead>
+            <tr>
+                <th >Action Type</th>
+                <div class="divider"/>
+                <td><ui:inputSelect class="slds-text-title--caps" options="{!v.actions}" aura:id="mySelect" value="{!v.aw.selectedAction}" change="{!c.dispItems}"/></td>
+            </tr>
+        </thead>
+        <thead>
+            <aura:if isTrue="{!v.aw.selectedAction=='update_rel'}">
+                <tr>
+                    <th >Related Objects</th>
+                    <div class="divider"/>
+                    <td><ui:inputSelect class="slds-text-title--caps" options="{!v.childObjects}" aura:id="mySelect" value="{!v.aw.selectedObject}"/></td>
+                </tr>
+            </aura:if>
+            <aura:if isTrue="{!v.aw.selectedAction=='update_par'}">
+                <tr>
+                    <th >Parent Objects</th>
+                    <div class="divider"/>
+                    <td><ui:inputSelect class="slds-text-title--caps" options="{!v.refFields}" aura:id="mySelect" value="{!v.aw.selectedRefPar}" change="{!c.dispRelateObjFields}"/></td>
+                </tr>
+            </aura:if>
+        </thead>
+        <aura:if isTrue="{!and(v.aw.selectedObject != '',v.aw.selectedAction=='update_rel')}">
+            <fieldset data-reactroot="" class="slds-theme--default slds-container--large">
+                <legend class="slds-p-vertical--small">&nbsp;&nbsp;Criteria for Updating Records</legend>
+                <div class="slds-card__body slds-card__body_inner">
+                    <span class="slds-radio">
+                        <input type="radio" id="radio-1" name="options" checked="{!v.aw.updateRec}" onchange="{!c.dispUpdateRec}"></input>
+                        <label class="slds-radio__label" for="radio-1">
+                            <span class="slds-radio_faux"></span>
+                            <span class="slds-form-element__label">Updated records meet all conditions</span>
+                        </label>
+                    </span>
+                    <span class="slds-radio">
+                        <input type="radio" id="radio-2" name="options" checked="{!v.aw.noCriteria}" onchange="{!c.dispNoCriteria}"></input>
+                        <label class="slds-radio__label" for="radio-2">
+                            <span class="slds-radio_faux"></span>
+                            <span class="slds-form-element__label">No criteria—just update the records!</span>
+                        </label>
+                    </span>
+                </div>
+            </fieldset>                    
+        </aura:if>
+        <aura:if isTrue="{!and(v.aw.dispRelWrap,v.aw.updateRec)}">
+            <aura:if isTrue="{!v.aw.selectedAction=='update_rel'}">
+                <c:LightningWrapper filterWrapper="{!v.relFilterWrapper}" fields="{!v.relFields}" filterName="Filter the records you update based on these conditions " conditions="true"/>
+            </aura:if>
+        </aura:if>
+        <aura:if isTrue="{!v.aw.dispRelWrap}">
+            <aura:if isTrue="{!v.aw.selectedAction=='update'}">
+                <c:LightningWrapper filterWrapper="{!v.filterWrapper}" fields="{!v.fields}" filterName="Set new field values for the records you update" conditions="false"/>
+            </aura:if>
+            <aura:if isTrue="{!v.aw.selectedAction=='update_rel'}">
+                <c:LightningWrapper filterWrapper="{!v.filterWrapper}" fields="{!v.relFields}" filterName="Set new field values for the records you update" conditions="false"/>
+            </aura:if>
+            <aura:if isTrue="{!v.aw.selectedAction=='update_par'}">
+                <c:LightningWrapper filterWrapper="{!v.filterWrapper}" fields="{!v.refObjFields}" filterName="Set new field values for the records you update" conditions="false"/>
+            </aura:if>
+        </aura:if>
+    </fieldset>
+</aura:component>

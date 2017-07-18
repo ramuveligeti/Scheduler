@@ -1,0 +1,11 @@
+<aura:component >
+    <aura:attribute name="bv" type="String" />
+    <aura:attribute name="bName" type="String" />
+    <aura:attribute name="bId" type="String" />
+    <aura:registerEvent name="getRecId" type="c:AddFilters"/>
+    <aura:if isTrue="{!v.bv != v.bId}">
+        <div aura:id="{!v.bId}" class="slds-truncate" title="Field" onclick="{!c.selectedLine}">
+            {!v.bv}
+        </div>
+    </aura:if>
+</aura:component>

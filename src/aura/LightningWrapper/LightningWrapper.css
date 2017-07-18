@@ -1,0 +1,19 @@
+.THIS.toggle {
+    display: none;
+}
+.THIS.div1 {
+    float: left;
+    width: 100px;
+    height: 35px;
+    margin: 10px;
+    padding: 10px;
+    border: 1px solid black;
+}
+.THIS.div2 {
+    float: left;
+    width: 300px;
+    height: 100px;
+    margin: 20px;
+    padding: 10px;
+    border: 1px solid black;
+}

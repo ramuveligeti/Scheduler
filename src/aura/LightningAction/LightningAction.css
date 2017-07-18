@@ -1,0 +1,19 @@
+/*toggleCss.css*/
+.THIS.toggle {
+    display: none;
+}
+.THIS.sumtable {
+    border-spacing: 0;
+    font-size:11px;
+    border-width: 1px;
+}
+.THIS.sumtable td {
+    border-width: 1px ;
+    padding: 5px;
+}
+.THIS.icon{
+	float:right;   
+    margin-top:-70px;
+    margin-right:20px;
+    margin-left: 600px;
+}

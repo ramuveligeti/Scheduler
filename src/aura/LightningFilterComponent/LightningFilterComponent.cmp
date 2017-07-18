@@ -1,0 +1,142 @@
+<aura:component controller="AdhocLightningScheduler">
+    <aura:attribute name="fw" type="Object" />
+    <aura:attribute name="operators" type="List" />
+    <aura:attribute name="lookupDialogHeader" type="Object" />
+    <aura:attribute name="lookupDialogValues" type="Object[]" />
+    <aura:attribute name="fields" type="List" />
+    <aura:attribute name="search" type="String" />
+    <aura:attribute name="timer" type="Integer" />
+    <aura:registerEvent name="addFilterEvent" type="c:AddFilters"/>
+    <aura:registerEvent name="removeFilterEvent" type="c:AddFilters"/>
+    <aura:registerEvent name="getPicklistValues" type="c:AddFilters"/>
+    <aura:registerEvent name="getLookupFields" type="c:AddFilters"/>
+    <aura:registerEvent name="addSubFilterEvent" type="c:AddFilters"/>
+    <aura:handler name="init" action="{!c.myAction}" value="{!this}" />
+    <aura:handler name="getRecId" event="c:AddFilters" action="{!c.assignLookup}"/>
+    
+    <tr>
+        <td style="width:2%">
+        	{!v.fw.lineNumber}
+        </td>
+        <td style="width:20%">
+            <div class="slds-truncate" title="Field">
+                <ui:inputSelect class="slds-text-title--caps" value="{!v.fw.selectedField}" change="{!c.dispOperator}">
+                    <aura:iteration items="{!v.fields}" var="source">
+                        <ui:inputSelectOption text="{!source.value}" label="{!source.label}" />
+                    </aura:iteration>
+                </ui:inputSelect>
+            </div>
+        </td>
+        <td style="width:20%" data-label="Account Name">
+            <div class="slds-truncate" title="Operator">
+                <ui:inputSelect class="slds-text-title--caps" aura:id="operatorValues" options="{!v.operators}" value="{!v.fw.selectedOperator}" />
+            </div>
+        </td>
+        <td style="width:20%" data-label="Close Date">
+            <div class="slds-truncate" title="Value">
+                <aura:if isTrue="{!v.fw.dataType == 'DATE'}">
+                    <ui:inputDate class="field" value="{!v.fw.filterDate}" displayDatePicker="true"/>
+                </aura:if>
+                <aura:if isTrue="{!v.fw.dataType == 'DATETIME'}">
+                    <ui:inputDateTime class="field" value="{!v.fw.filterDate}" displayDatePicker="true"/>
+                </aura:if>
+                <aura:if isTrue="{!v.fw.dataType == 'STRING'}">
+                    <ui:inputText aura:id="name" value="{!v.fw.selectedValue}"/>
+                </aura:if>
+                <aura:if isTrue="{!v.fw.dataType == 'DECIMAL'}">
+                    <ui:inputNumber format="#,##0,000.00#" aura:id="name" value="{!v.fw.selectedValue}"/>
+                </aura:if>
+                <aura:if isTrue="{!v.fw.dataType == 'INTEGER'}">
+                    <ui:inputNumber format="#,##0,000#" aura:id="name" value="{!v.fw.selectedValue}"/>
+                </aura:if>
+                <aura:if isTrue="{!v.fw.dataType == 'ID'}">
+                    <ui:inputText aura:id="name" value="{!v.fw.selectedValue}"/>
+                </aura:if>
+                <aura:if isTrue="{!v.fw.dataType == 'TEXTAREA'}">
+                    <ui:inputTextArea aura:id="name" value="{!v.fw.selectedValue}"/>
+                </aura:if>
+                <aura:if isTrue="{!v.fw.dataType == 'REFERENCE'}">
+                    <div class="slds-combobox__form-element slds-input-has-icon slds-input-has-icon_right">
+                        <ui:inputText class="slds-input slds-combobox__input" placeholder="Search Salesforce" aura:id="name" value="{!v.fw.selectedValue}" click="{!c.dispModal}"/>
+                        <div aura:id="closeButton" style="display:none">
+                            <button class="slds-button slds-button_icon slds-input__icon slds-input__icon_right" title="Remove selected option" onclick="{!c.clearValue}">
+                                <lightning:icon iconName="utility:close" size="xx-small" />
+                                <span class="slds-assistive-text">Remove selected option</span>
+                            </button>
+                        </div>
+                        <div aura:id="searchButton">
+                            <span class="slds-icon_container slds-icon-utility-search slds-input__icon slds-input__icon_right" title="Description of icon when needed">
+                                <lightning:icon iconName="utility:search" size="xx-small" />
+                                <span class="slds-assistive-text">Description of icon</span>
+                            </span>
+                        </div>
+                    </div>
+                </aura:if>
+                <aura:if isTrue="{!v.fw.dataType == 'BOOLEAN'}">
+                    <ui:inputCheckbox aura:id="name" value="{!v.fw.selectedValue}"/>
+                </aura:if>
+                <aura:if isTrue="{!v.fw.dataType == 'PICKLIST'}">
+                    <ui:inputSelect class="slds-text-title--caps" value="{!v.fw.selectedValue}">
+                        <aura:iteration items="{!v.fw.picklistVals}" var="source">
+                            <ui:inputSelectOption text="{!source.value}" label="{!source.label}" />
+                        </aura:iteration>
+                    </ui:inputSelect>
+                </aura:if>
+            </div>
+        </td>
+        <td style="width:20%">
+            <lightning:buttonIcon iconName="utility:close" size="medium" alternativeText="Indicates approval" onclick="{!c.removeLine}"/>
+            <aura:if isTrue="{!v.fw.dispAdd}">
+                <lightning:buttonIcon iconName="utility:add" size="medium" alternativeText="Indicates approval" onclick="{!c.addWrapper}"/>
+            </aura:if>
+        </td>
+    </tr>
+    <div aura:id="lookupModal">
+        <div data-reactroot="" class="demo-only" style="height: 640px;">
+            <section role="dialog" tabindex="-1" aria-labelledby="modal-heading-01" aria-describedby="modal-content-id-1" class="slds-modal slds-fade-in-open">
+                <div class="slds-modal__container">
+                    <header class="slds-modal__header">
+                        <button class="slds-button slds-button_icon slds-modal__close slds-button_icon-inverse" title="Close" onclick="{!c.myAction}">
+                            <lightning:icon iconName="utility:close" size="xx-small" />
+                            <span class="slds-assistive-text">Close</span>
+                        </button>
+                        <h2 id="modal-heading-01" class="slds-text-heading_medium slds-hyphenate">Search</h2>
+                    </header>
+                    <div class="slds-modal__content slds-p-around_medium" id="modal-content-id-1" style="height: 40%;">
+                        <ui:inputText class="slds-input slds-combobox__input" placeholder="Search Salesforce" aura:id="name" value="{!v.search}" keyup="{!c.searchFunc}" updateOn="keyup"/>
+                        <div class="slds-grid slds-icon_container slds-card__body">
+                            <table class="slds-table slds-table--bordered slds-table--cell-buffer" id="filterTable">
+                                <thead>
+                                    <tr class="slds-text-title--caps">
+                                        <aura:iteration items="{!v.lookupDialogHeader}" var="dh">
+                                            <th scope="col">
+                                                <div class="slds-truncate" title="Fields">{!dh}</div>
+                                            </th>
+                                        </aura:iteration>
+                                    </tr>
+                                </thead>
+                                <tbody>
+                                    <aura:iteration items="{!v.lookupDialogValues}" var="bv">
+                                        <tr>
+                                            <aura:iteration items="{!bv}" var="b">
+                                                <aura:if isTrue="{!b != bv[0]}">
+                                                    <td>
+                                                        <c:LightningLookupModal bId="{!bv[0]}" bName="{!bv[1]}" bv="{!b}"/>
+                                                    </td>
+                                                </aura:if>
+                                            </aura:iteration>
+                                        </tr>
+                                    </aura:iteration>
+                                </tbody>
+                            </table> 
+                        </div>
+                    </div>
+                    <footer class="slds-modal__footer">
+                        <button class="slds-button slds-button_neutral">Cancel</button>
+                    </footer>
+                </div>
+            </section>
+            <div class="slds-backdrop slds-backdrop_open"></div>
+        </div>
+    </div>
+</aura:component>

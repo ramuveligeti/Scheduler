@@ -1,0 +1,17 @@
+{
+    "projectName": "Scheduler",
+    "username": "ramu.veligeti@yahoo.co.in",
+    "id": "60184fa0-6b93-11e7-a5ce-e9502761c0fb",
+    "namespace": "",
+    "orgType": "developer",
+    "loginUrl": "https://login.salesforce.com/",
+    "instanceUrl": "https://rvt-dev-ed.my.salesforce.com",
+    "workspace": "/Users/work/Documents/Workspace/",
+    "subscription": [
+        "ApexClass",
+        "ApexComponent",
+        "ApexPage",
+        "ApexTrigger",
+        "StaticResource"
+    ]
+}

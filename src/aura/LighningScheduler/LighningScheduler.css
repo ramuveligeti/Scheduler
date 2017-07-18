@@ -1,0 +1,30 @@
+/*toggleCss.css*/
+.THIS.toggle {
+    display: none;
+}
+.THIS .divider{
+    width:5px;
+    height:auto;
+    display:inline-block;
+}
+.THIS .left-div {
+    float: left;
+    width: 10px;
+    height: 20px;
+    margin-right: 30px;
+}
+.THIS .right-div {
+    margin-left: 10px;
+}
+.THIS.sumtable {
+    border-spacing: 0;
+    font-size:11px;
+    border-width: 1px;
+}
+.THIS.sumtable td {
+    border-width: 1px ;
+    padding: 5px;
+}
+.THIS.buttonSpacing{
+    margin-right:50%
+}

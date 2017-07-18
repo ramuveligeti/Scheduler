@@ -1,0 +1,86 @@
+<aura:component implements="flexipage:availableForAllPageTypes,force:appHostable" access="global" controller="AdhocLightningScheduler">
+	<ltng:require styles="{!$Resource.SLDS214 + '/assets/styles/salesforce-lightning-design-system.css'}"/>
+    <aura:attribute name="objects" type="Object[]" />
+    <aura:attribute name="childObjects" type="Object[]" />
+    <aura:attribute name="filterWrapper" type="Object[]" />
+    <aura:attribute name="relFilterWrapper" type="Object[]" />
+    <aura:attribute name="actions" type="List" />
+    <aura:attribute name="selectedObj" type="String"/>
+    <aura:attribute name="selectedActObj" type="String"/>
+    <aura:attribute name="selectedAction" type="String"/>
+    <aura:attribute name="fields" type="List" />
+    <aura:attribute name="refFields" type="List" />
+    <aura:attribute name="relFields" type="List" />
+    <aura:attribute name="refObjFields" type="List" />
+    <aura:attribute name="actionWrapper" type="Object[]" />
+    <aura:attribute name="filterDate" type="Date" />
+    <aura:attribute name="actionTrigger" type="Boolean" />
+    <aura:attribute name="actionEvent" type="Boolean" />
+    <aura:handler name="init" action="{!c.myAction}" value="{!this}" />
+    <aura:handler name="getPicklistValues" event="c:AddFilters" action="{!c.getValues}"/>
+    <aura:handler name="getRelObjs" event="c:AddFilters" action="{!c.getRelatedObjs}"/>
+    <aura:handler name="getRelFilWrap" event="c:AddFilters" action="{!c.getRelatedFields}"/>
+    <aura:handler name="removeActItem" event="c:AddFilters" action="{!c.removeActionItem}"/>
+    <aura:handler name="getLookupFields" event="c:AddFilters" action="{!c.fetchLookupFields}"/>
+    
+    <article class="slds-card">
+        <div class="slds-card__header slds-grid">
+            <header class="slds-media slds-media--center slds-has-flexi-truncate">
+                <div class="slds-media__figure">
+                    <lightning:icon iconName="standard:orders" size="small" />
+                </div>
+                <div class="slds-media__body">
+                    <h2>
+                        <a href="javascript:void(0);" class="slds-card__header-link slds-truncate">
+                            <span class="slds-text-heading--small">Object</span>
+                        </a>
+                    </h2>
+                </div>
+            </header>
+        </div>
+        <div class="slds-card__header slds-icon_container slds-card__body" width="10%">
+            <ui:inputSelect class="slds-text-title--caps" options="{!v.objects}" aura:id="mySelect" value="{!v.selectedObj}" change="{!c.dispFilter}"/>
+        </div>
+    </article>
+    <br/>
+    <div aura:id="filterBlock">
+        <c:LightningWrapper filterWrapper="{!v.filterWrapper}" fields="{!v.fields}" filterName="Filter records" conditions="true"/>
+    </div>
+	<br/>
+    <article  aura:id="actionsBlock" class="slds-card">
+        <div class="slds-card__header slds-grid">
+            <header class="slds-media slds-media--center slds-has-flexi-truncate">
+                <div class="slds-media__figure">
+                    <span class="slds-icon_container slds-icon-standard-contact" title="description of icon when needed">
+                        <lightning:icon iconName="standard:task" size="small" />
+                    </span>
+                </div>
+                <div class="slds-media__body">
+                    <h2>
+                        <a href="javascript:void(0);" class="slds-card__header-link slds-truncate">
+                            <span class="slds-text-heading--small">Select and Define Action</span>
+                        </a>
+                    </h2>
+                </div>
+            </header>
+            <div style="margin-right:50%">
+                <aura:if isTrue="{!v.actionWrapper.length >0}">
+                    <lightning:button class="slds-button slds-button_brand" label="Save" onclick="{!c.addAction}"/>
+                </aura:if>
+                <lightning:button class="slds-button slds-button_brand" label="Add Action" onclick="{!c.addAction}"/>
+                <aura:if isTrue="{!v.actionWrapper.length >0}">
+                    <lightning:button class="slds-button slds-button_brand" label="Cancel" onclick="{!c.addAction}"/>
+                </aura:if>
+            </div>
+        </div>
+        <div class="slds-card__body slds-card__body_inner" style="margin-top:-20px">
+            <table style="margin-left:10%">
+                <aura:if isTrue="{!v.actionWrapper.length >0}">
+                    <aura:iteration items="{!v.actionWrapper}" var="aw">
+                        <c:LightningAction aw="{!aw}" actions="{!aw.action}" frequency="{!aw.frequency}" childObjects="{!v.childObjects}" relFilterWrapper="{!aw.relFilterWrapper}" filterWrapper="{!aw.filterWrapper}" refObjFields="{!v.refObjFields}" refFields="{!v.refFields}" relFields="{!v.relFields}" fields="{!v.fields}"/>
+                    </aura:iteration>
+                </aura:if>
+            </table>
+        </div>
+    </article>  
+</aura:component>
