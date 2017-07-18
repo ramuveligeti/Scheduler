@@ -30,5 +30,8 @@
     },
     fetchLookupFields : function(component,event,helper) {
         helper.fetchLookupFields(component,event);
+    },
+    saveActions : function(component,event,helper) {
+        helper.saveActions(component,event);
     }
 })

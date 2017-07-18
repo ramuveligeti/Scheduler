@@ -55,41 +55,5 @@
                 </tbody>
             </table>
         </div>
-        <aura:if isTrue="{!v.conditions}">
-            <div class="slds-grid slds-icon_container slds-card__body">
-                <table>
-                    <legend class="slds-p-vertical--small">&nbsp;&nbsp;Conditions</legend>
-                    <div class="slds-card__body slds-card__body_inner">
-                        <tr>
-                        <span class="slds-radio">
-                            <input type="radio" id="conditions-1" name="options" ></input>
-                            <label class="slds-radio__label" for="conditions-1">
-                                <span class="slds-radio_faux"></span>
-                                <span class="slds-form-element__label">All of the conditions are met (AND)</span>
-                            </label>
-                        </span>
-                        </tr>
-                        <tr>
-                        <span class="slds-radio">
-                            <input type="radio" id="conditions-2" name="options" ></input>
-                            <label class="slds-radio__label" for="conditions-2">
-                                <span class="slds-radio_faux"></span>
-                                <span class="slds-form-element__label">Any of the conditions are met (OR)</span>
-                            </label>
-                        </span>
-                        </tr>
-                        <tr>
-                        <span class="slds-radio">
-                            <input type="radio" id="conditions-3" name="options" ></input>
-                            <label class="slds-radio__label" for="conditions-3">
-                                <span class="slds-radio_faux"></span>
-                                <span class="slds-form-element__label">Customize the logic</span>
-                            </label>
-                        </span>
-                        </tr>
-                    </div>
-                </table>
-            </div> 
-        </aura:if>
     </article>
 </aura:component>

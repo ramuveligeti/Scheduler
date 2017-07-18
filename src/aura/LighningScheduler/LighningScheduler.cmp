@@ -65,12 +65,9 @@
             </header>
             <div style="margin-right:50%">
                 <aura:if isTrue="{!v.actionWrapper.length >0}">
-                    <lightning:button class="slds-button slds-button_brand" label="Save" onclick="{!c.addAction}"/>
+                    <lightning:button class="slds-button slds-button_brand" label="Save" onclick="{!c.saveActions}"/>
                 </aura:if>
                 <lightning:button class="slds-button slds-button_brand" label="Add Action" onclick="{!c.addAction}"/>
-                <aura:if isTrue="{!v.actionWrapper.length >0}">
-                    <lightning:button class="slds-button slds-button_brand" label="Cancel" onclick="{!c.addAction}"/>
-                </aura:if>
             </div>
         </div>
         <div class="slds-card__body slds-card__body_inner" style="margin-top:-20px">
