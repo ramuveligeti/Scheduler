@@ -24,23 +24,31 @@
     <aura:handler name="getLookupFields" event="c:AddFilters" action="{!c.fetchLookupFields}"/>
     
     <article class="slds-card">
-        <div class="slds-card__header slds-grid">
-            <header class="slds-media slds-media--center slds-has-flexi-truncate">
-                <div class="slds-media__figure">
-                    <lightning:icon iconName="standard:orders" size="small" />
-                </div>
-                <div class="slds-media__body">
-                    <h2>
-                        <a href="javascript:void(0);" class="slds-card__header-link slds-truncate">
-                            <span class="slds-text-heading--small">Object</span>
-                        </a>
-                    </h2>
-                </div>
-            </header>
-        </div>
-        <div class="slds-card__header slds-icon_container slds-card__body" width="10%">
-            <ui:inputSelect class="slds-text-title--caps" options="{!v.objects}" aura:id="mySelect" value="{!v.selectedObj}" change="{!c.dispFilter}"/>
-        </div>
+        <table>
+            <tr>
+                <td>
+                    <div class="slds-card__header slds-grid">
+                        <header class="slds-media slds-media--center slds-has-flexi-truncate">
+                            <div class="slds-media__figure">
+                                <lightning:icon iconName="standard:orders" size="small" />
+                            </div>
+                            <div class="slds-media__body">
+                                <h2>
+                                    <a href="javascript:void(0);" class="slds-card__header-link slds-truncate">
+                                        <span class="slds-text-heading--small">Select Object</span>
+                                    </a>
+                                </h2>
+                            </div>
+                        </header>
+                    </div>
+                </td>
+                <td>
+                    <div class="slds-card__header slds-icon_container slds-card__body" width="10%">
+                        <ui:inputSelect class="slds-text-title--caps" options="{!v.objects}" aura:id="mySelect" value="{!v.selectedObj}" change="{!c.dispFilter}"/>
+                    </div>
+                </td>
+            </tr>
+        </table>
     </article>
     <br/>
     <div aura:id="filterBlock">

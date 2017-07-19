@@ -250,6 +250,7 @@
     getActions : function(component,event){
         var opts = [];
         opts.push({"class": "optionClass", label: '--None--', value: ''});
+        opts.push({"class": "optionClass", label: 'Create related record', value: 'create_rel'});
         opts.push({"class": "optionClass", label: 'Update related records', value: 'update_rel'});
         opts.push({"class": "optionClass", label: 'Update records', value: 'update'});
         opts.push({"class": "optionClass", label: 'Update Parent records', value: 'update_par'});
@@ -298,7 +299,7 @@
         var act = event.getParam("filWrap");
         act['dispRelList'] = true;
         component.set("v.selectedActObj",act['selectedObject']);
-        if(act['selectedAction'] == 'update_rel'){
+        if(act['selectedAction'] == 'update_rel' || act['selectedAction'] == 'create_rel'){
             var wrap = component.get("v.actionWrapper");
             var index = act['index'];
             wrap[index] = act;
@@ -325,7 +326,7 @@
         var act = event.getParam("filWrap");
         act['dispRelWrap'] = true;
         console.log('bbb=='+act['selectedRefPar']);
-        if(act['selectedAction'] == 'update_rel'){
+        if(act['selectedAction'] == 'update_rel' || act['selectedAction'] == 'create_rel'){
             var wrap = component.get("v.actionWrapper");
             var index = act['index'];
             //act['filterWrapper'] = [];
@@ -380,6 +381,13 @@
         component.set("v.actionWrapper", wrap);
     },
     saveActions : function(component,event) {
-        
+        var wrap = component.get("v.actionWrapper");
+        var filter = component.get("v.filterWrapper");
+        var sObj = component.get("v.selectedObj");
+        var schWrapper = {};
+        schWrapper['sObject'] = sObj;
+        schWrapper['filter'] = filter;
+        schWrapper['wrap'] = wrap;
+
     }
 })

@@ -43,6 +43,13 @@
             </tr>
         </thead>
         <thead>
+            <aura:if isTrue="{!v.aw.selectedAction=='create_rel'}">
+                <tr>
+                    <th >Related Objects</th>
+                    <div class="divider"/>
+                    <td><ui:inputSelect class="slds-text-title--caps" options="{!v.childObjects}" aura:id="mySelect" value="{!v.aw.selectedObject}" change="{!c.dispUpdateRec}"/></td>
+                </tr>
+            </aura:if>
             <aura:if isTrue="{!v.aw.selectedAction=='update_rel'}">
                 <tr>
                     <th >Related Objects</th>
@@ -93,6 +100,9 @@
             </aura:if>
             <aura:if isTrue="{!v.aw.selectedAction=='update_par'}">
                 <c:LightningWrapper filterWrapper="{!v.filterWrapper}" fields="{!v.refObjFields}" filterName="Set new field values for the records you update" conditions="false"/>
+            </aura:if>
+            <aura:if isTrue="{!v.aw.selectedAction=='create_rel'}">
+                <c:LightningWrapper filterWrapper="{!v.filterWrapper}" fields="{!v.relFields}" filterName="Set new field values for the record you create" conditions="false"/>
             </aura:if>
         </aura:if>
     </fieldset>
