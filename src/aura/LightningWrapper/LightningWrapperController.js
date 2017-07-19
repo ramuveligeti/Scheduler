@@ -46,5 +46,11 @@
         var fragment = document.createDocumentFragment();
         fragment.appendChild(document.getElementById(c[0].id));
         document.getElementById(cmp.get("v.parentId")).appendChild(fragment);
+    },
+    showLogic : function(component,event,helper){
+        component.set("v.customLogic",true);
+    },
+    allConditions : function(component,event,helper){
+        component.set("v.customLogic",false);
     }    
 })

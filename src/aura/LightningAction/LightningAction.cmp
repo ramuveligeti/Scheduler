@@ -22,30 +22,24 @@
         </div>
         <thead>
             <tr>
-                <th >Schedule Date time</th>
+                <th style="width:10%">Schedule Date time</th>
                 <div class="divider"/>
-                <td><ui:inputDateTime class="field" value="{!v.aw.filterDate}" displayDatePicker="true"/></td>
+                <td style="width:40%"><ui:inputDateTime class="field" value="{!v.aw.filterDate}" displayDatePicker="true"/></td>
+                <div class="divider"/>
+                <th style="width:10%;text-align:right;">Frequency</th>
+                <div class="divider"/>
+                <td style="width:40%"><ui:inputSelect class="slds-text-title--caps" options="{!v.frequency}" value="{!v.aw.selectedFrequency}"/></td>
             </tr>
         </thead>
         <thead>
             <tr>
-                <th >Frequency</th>
+                <th style="width:10%">Action Type</th>
                 <div class="divider"/>
-                <td><ui:inputSelect class="slds-text-title--caps" options="{!v.frequency}" value="{!v.aw.selectedFrequency}"/></td>
-            </tr>
-        </thead>
-        <thead>
-            <tr>
-                <th >Occurrence</th>
+                <td style="width:40%"><ui:inputSelect class="slds-text-title--caps" options="{!v.actions}" aura:id="mySelect" value="{!v.aw.selectedAction}" change="{!c.dispItems}"/></td>
                 <div class="divider"/>
-                <td><ui:inputNumber class="field" format="#00#" value="{!v.aw.occurrence}"/></td>
-            </tr>
-        </thead>
-        <thead>
-            <tr>
-                <th >Action Type</th>
+                <th style="width:10%;text-align:right;">Occurrence</th>
                 <div class="divider"/>
-                <td><ui:inputSelect class="slds-text-title--caps" options="{!v.actions}" aura:id="mySelect" value="{!v.aw.selectedAction}" change="{!c.dispItems}"/></td>
+                <td style="width:40%"><ui:inputNumber class="field" format="#00#" value="{!v.aw.occurrence}"/></td>
             </tr>
         </thead>
         <thead>

@@ -9,6 +9,7 @@
     <aura:handler name="addSubFilterEvent" event="c:AddFilters" action="{!c.createSubWrapper}"/>
     <aura:attribute name="startId" type="string"/>
     <aura:attribute name="parentId" type="string"/>
+    <aura:attribute name="customLogic" type="Boolean" default="false"/>
     
     <aura:handler name="init" action="{!c.myAction}" value="{!this}" />
     <article  aura:id="filterBlock" class="slds-card">
@@ -55,5 +56,37 @@
                 </tbody>
             </table>
         </div>
+        <aura:if isTrue="{!v.conditions}">
+            <div class="slds-grid slds-icon_container slds-card__body">
+                <div class="slds-card__body slds-card__body_inner">
+                    <span class="slds-radio">
+                        <input type="radio" id="conditions-1" name="options" checked="true" onchange="{!c.allConditions}"></input>
+                        <label class="slds-radio__label" for="conditions-1">
+                            <span class="slds-radio_faux"></span>
+                            <span class="slds-form-element__label">All of the conditions are met (AND)</span>
+                        </label>
+                    </span>
+                    <span class="slds-radio">
+                        <input type="radio" id="conditions-2" name="options" onchange="{!c.allConditions}"></input>
+                        <label class="slds-radio__label" for="conditions-2">
+                            <span class="slds-radio_faux"></span>
+                            <span class="slds-form-element__label">Any of the conditions are met (OR)</span>
+                        </label>
+                    </span>
+                    <span class="slds-radio">
+                        <input type="radio" id="conditions-3" name="options" onchange="{!c.showLogic}"></input>
+                        <label class="slds-radio__label" for="conditions-3">
+                            <span class="slds-radio_faux"></span>
+                            <span class="slds-form-element__label">Customize the logic</span>
+                        </label>
+                    </span>
+                </div>
+                <aura:if isTrue="{!v.customLogic}">
+                    <div>
+                        <ui:inputText aura:id="logic" />
+                    </div>
+                </aura:if>
+            </div> 
+        </aura:if>
     </article>
 </aura:component>
