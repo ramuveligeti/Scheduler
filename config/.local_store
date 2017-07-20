@@ -364,15 +364,17 @@
         "mmState": "clean"
     },
     "AdhocLightningScheduler.cls": {
-        "createdById": "00528000001JBjQAAW",
-        "createdByName": "Ramu Veligeti",
-        "createdDate": "2017-06-19T01:59:40.000Z",
-        "fileName": "unpackaged/classes/AdhocLightningScheduler.cls",
-        "fullName": "AdhocLightningScheduler",
         "id": "01p2800000FZDMnAAP",
+        "name": "AdhocLightningScheduler",
+        "createdDate": "2017-06-19T01:59:40.000+0000",
+        "createdById": "00528000001JBjQAAW",
+        "namespacePrefix": null,
         "lastModifiedById": "00528000001JBjQAAW",
+        "lastModifiedDate": "2017-07-20T20:08:50.000+0000",
+        "fullName": "AdhocLightningScheduler",
+        "fileName": "unpackaged/classes/AdhocLightningScheduler.cls",
+        "createdByName": "Ramu Veligeti",
         "lastModifiedByName": "Ramu Veligeti",
-        "lastModifiedDate": "2017-07-16T09:18:05.000Z",
         "manageableState": "unmanaged",
         "type": "ApexClass",
         "mmState": "clean"

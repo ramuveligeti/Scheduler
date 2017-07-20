@@ -13,25 +13,25 @@
         var opts = [];
         console.log('ta-='+filter['triggerAction']);
         if(filter['triggerAction'] == 'ops' || filter['triggerAction'] == 'actionops'){
-            opts.push({"class": "optionClass", label: '--None--', value: ''});
-            opts.push({"class": "optionClass", label: 'Equals', value: '='});
-            opts.push({"class": "optionClass", label: 'Not Equal to', value: '!='});
+            opts.push({label: '--None--', value: ''});
+            opts.push({label: 'Equals', value: '='});
+            opts.push({label: 'Not Equal to', value: '!='});
             if(dataType == 'DATETIME' || dataType == 'DATE' || dataType == 'DECIMAL' || dataType == 'INTEGER'){
-                opts.push({"class": "optionClass", label: 'greater than', value: '>'});
-                opts.push({"class": "optionClass", label: 'less than', value: '<'});
-                opts.push({"class": "optionClass", label: 'greater or equal', value: '>='});
-                opts.push({"class": "optionClass", label: 'less or equal', value: '<='});
-                opts.push({"class": "optionClass", label: 'is null', value: '= null'});
-                opts.push({"class": "optionClass", label: 'is not null', value: '!= null'});
+                opts.push({label: 'greater than', value: '>'});
+                opts.push({label: 'less than', value: '<'});
+                opts.push({label: 'greater or equal', value: '>='});
+                opts.push({label: 'less or equal', value: '<='});
+                opts.push({label: 'is null', value: '= null'});
+                opts.push({label: 'is not null', value: '!= null'});
             } else if(dataType == 'STRING'){
-                opts.push({"class": "optionClass", label: 'contains', value: 'like'});
-                opts.push({"class": "optionClass", label: 'does not contain', value: 'not like'});
-                opts.push({"class": "optionClass", label: 'starts with', value: 'starts'});
-                opts.push({"class": "optionClass", label: 'is null', value: '= null'});
-                opts.push({"class": "optionClass", label: 'is not null', value: '!= null'});
+                opts.push({label: 'contains', value: 'like'});
+                opts.push({label: 'does not contain', value: 'not like'});
+                opts.push({label: 'starts with', value: 'starts'});
+                opts.push({label: 'is null', value: '= null'});
+                opts.push({label: 'is not null', value: '!= null'});
             }
         }else{
-            opts.push({"class": "optionClass", label: 'Equals', value: '='});
+            opts.push({label: 'Equals', value: '='});
         }
         
         if(dataType == 'PICKLIST'){

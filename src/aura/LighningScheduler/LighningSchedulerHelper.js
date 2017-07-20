@@ -103,7 +103,7 @@
         console.log(wrap);
         var singleObj = {};
         var opts = [];
-        opts.push({"class": "optionClass", label: '--None--', value: ''});
+        opts.push({ label: '--None--', value: ''});
         if(act){
             singleObj['selectedObject']= component.get("v.selectedActObj");
             singleObj['triggerAction'] = 'action';
@@ -111,13 +111,14 @@
         }else{
             singleObj['selectedObject']= component.get("v.selectedObj");
             singleObj['triggerAction'] = 'ops';
+            singleObj['actionIndex'] = -1;
         }
         singleObj['selectedField']='';
         singleObj['selectedOperator']='';
         singleObj['selectedValue']='';
         singleObj['selectedValueId']='';
         singleObj['operators'] = opts;
-        singleObj['picklistVals'] = '';
+        singleObj['picklistVals'] = [];
         singleObj['dataType'] = '';
         singleObj['filterDate'] = component.get("v.filterDate");
         singleObj['index'] = cnt;
@@ -156,15 +157,16 @@
 
         var singleObj = {};
         var opts = [];
-        opts.push({"class": "optionClass", label: '--None--', value: ''});
+        opts.push({ label: '--None--', value: ''});
         singleObj['selectedObject']= component.get("v.selectedActObj");
         singleObj['triggerAction'] = 'actionops';
         singleObj['actionIndex'] = actionId['index'];
         singleObj['selectedField']='';
         singleObj['selectedOperator']='';
         singleObj['selectedValue']='';
+        singleObj['selectedValueId']='';
         singleObj['operators'] = opts;
-        singleObj['picklistVals'] = '';
+        singleObj['picklistVals'] = [];
         singleObj['dataType'] = '';
         singleObj['filterDate'] = component.get("v.filterDate");
         singleObj['index'] = cnt;
@@ -220,11 +222,11 @@
                     if(act == 'actionops'){
                         fWrap = aFilter['relFilterWrapper'];  
                         fWrap[index] = filter;
-                        aFilter['relFilterWrapper '] = fWrap;
+                        aFilter['relFilterWrapper'] = fWrap;
                     }else{
                         fWrap = aFilter['filterWrapper'];  
                         fWrap[index] = filter;
-                        aFilter['filterWrapper '] = fWrap;
+                        aFilter['filterWrapper'] = fWrap;
                     } 
                     
                     actionId[aIndex] = aFilter;
@@ -249,12 +251,12 @@
     },
     getActions : function(component,event){
         var opts = [];
-        opts.push({"class": "optionClass", label: '--None--', value: ''});
-        opts.push({"class": "optionClass", label: 'Create related record', value: 'create_rel'});
-        opts.push({"class": "optionClass", label: 'Update related records', value: 'update_rel'});
-        opts.push({"class": "optionClass", label: 'Update records', value: 'update'});
-        opts.push({"class": "optionClass", label: 'Update Parent records', value: 'update_par'});
-        opts.push({"class": "optionClass", label: 'Export to CSV', value: 'csv'});
+        opts.push({ label: '--None--', value: ''});
+        opts.push({ label: 'Create related record', value: 'create_rel'});
+        opts.push({ label: 'Update related records', value: 'update_rel'});
+        opts.push({ label: 'Update records', value: 'update'});
+        opts.push({ label: 'Update Parent records', value: 'update_par'});
+        opts.push({ label: 'Export to CSV', value: 'csv'});
         component.set("v.actions",opts);
     },
     createAction : function(component,event) {
@@ -270,11 +272,11 @@
         }
         //var wrap = [];
         var opts = [];
-        opts.push({"class": "optionClass", label: '--None--', value: ''});
-        opts.push({"class": "optionClass", label: 'Daily', value: '1'});
-        opts.push({"class": "optionClass", label: 'Weekly', value: '7'});
-        opts.push({"class": "optionClass", label: 'Fortnightly', value: '15'});
-        opts.push({"class": "optionClass", label: 'Monthly', value: '30'});
+        opts.push({ label: '--None--', value: ''});
+        opts.push({ label: 'Daily', value: '1'});
+        opts.push({ label: 'Weekly', value: '7'});
+        opts.push({ label: 'Fortnightly', value: '15'});
+        opts.push({ label: 'Monthly', value: '30'});
         singleObj['action'] = component.get("v.actions");
         singleObj['lineNumber'] = cnt+1;
         singleObj['index'] = cnt;
@@ -314,6 +316,7 @@
         if(act['selectedAction'] == 'update'){
             act['dispRelWrap'] = true;
             act['dispRelList'] = false;
+            component.set("v.selectedActObj",component.get("v.selectedObj"));
             var wrap = component.get("v.actionWrapper");
             var index = act['index'];
             wrap[index] = act;
@@ -385,9 +388,13 @@
         var filter = component.get("v.filterWrapper");
         var sObj = component.get("v.selectedObj");
         var schWrapper = {};
-        schWrapper['sObject'] = sObj;
-        schWrapper['filter'] = filter;
-        schWrapper['wrap'] = wrap;
-
+        schWrapper['sObj'] = sObj;
+        schWrapper['filterWrapper'] = filter;
+        schWrapper['actionwrap'] = wrap;
+        console.log(wrap);
+        var action = component.get("c.saveScheduler");
+        action.setParams({"schJson":JSON.stringify(schWrapper)});
+        action.setCallback(this, function(data) {});
+        $A.enqueueAction(action);
     }
 })

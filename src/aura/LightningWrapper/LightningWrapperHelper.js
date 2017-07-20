@@ -74,7 +74,7 @@
         singleObj['selectedObject'] = filter['selectedObject'];
         singleObj['selectedValue']='';
         singleObj['operators'] = opts;
-        singleObj['picklistVals'] = '';
+        singleObj['picklistVals'] = [];
         singleObj['triggerAction'] = filter['triggerAction'];
         singleObj['dataType'] = '';
         singleObj['filterDate'] = component.get("v.filterDate");
@@ -112,7 +112,7 @@
         singleObj['selectedObject'] = filter['selectedObject'];
         singleObj['selectedValue']='';
         singleObj['operators'] = opts;
-        singleObj['picklistVals'] = '';
+        singleObj['picklistVals'] = [];
         singleObj['triggerAction'] = filter['triggerAction'];
         singleObj['dataType'] = '';
         singleObj['filterDate'] = component.get("v.filterDate");

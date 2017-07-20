@@ -192,23 +192,68 @@ public class AdhocLightningScheduler{
         return options;
     }
 
-    //Wrapper for Filter Screen
-    public class filterWrapper{
-        @auraEnabled public String filterOption{get;set;}
-        @auraEnabled public String filterOperator{get;set;}
-        @auraEnabled public List<SelectOption> operators{get;set;}
-        @auraEnabled public String value{get;set;}
-        @auraEnabled public String lookupValue{get;set;}
-        @auraEnabled public Scheduler__c sch{get;set;}
-        @auraEnabled public Date dateValue{get;set;}
-        @auraEnabled public Datetime datetimeValue{get;set;}
-        @auraEnabled public String dataType{get;set;}
-        @auraEnabled public list<SelectOption> picklistOptions{get;set;}
-        @auraEnabled public Integer uniqueId{get;set;}
-        @auraEnabled public String andOperator{get;set;}
-        @auraEnabled public Integer sequence{get;set;}
+    @auraEnabled
+    public static void saveScheduler(String schJson){
+        system.debug(schJson);
+        Scheduler sch = (Scheduler)JSON.deserialize(schJson, Scheduler.class);
+        system.debug(sch);
+    }
+
+	public class Operators {
+		@auraEnabled public String label {get;set;} 
+		@auraEnabled public String value {get;set;} 
+		@auraEnabled public Boolean selected {get;set;} 
     }
     
+	public class ActionWrap {
+		@auraEnabled public List<Operators> action {get;set;} 
+		@auraEnabled public Integer lineNumber {get;set;} 
+		@auraEnabled public Integer index {get;set;} 
+		@auraEnabled public String selectedAction {get;set;} 
+		@auraEnabled public String filterDate {get;set;} 
+		@auraEnabled public String selectedObject {get;set;} 
+		@auraEnabled public Boolean dispRelList {get;set;} 
+		@auraEnabled public Boolean dispRelWrap {get;set;} 
+		@auraEnabled public String fields {get;set;}
+		@auraEnabled public List<FilterWrapper> relFilterWrapper {get;set;} 
+		@auraEnabled public List<FilterWrapper> filterWrapper {get;set;} 
+		@auraEnabled public String selectedRefPar {get;set;} 
+		@auraEnabled public List<Operators> frequency {get;set;} 
+		@auraEnabled public String occurrence {get;set;} 
+		@auraEnabled public String selectedFrequency {get;set;} 
+		@auraEnabled public Boolean updateRec {get;set;} 
+		@auraEnabled public Boolean noCriteria {get;set;} 
+    }
+
+	public class FilterWrapper {
+		@auraEnabled public String selectedObject {get;set;} 
+		@auraEnabled public String triggerAction {get;set;} 
+		@auraEnabled public Integer actionIndex {get;set;} 
+		@auraEnabled public String selectedField {get;set;} 
+		@auraEnabled public String selectedOperator {get;set;} 
+		@auraEnabled public String selectedValue {get;set;} 
+		@auraEnabled public String selectedValueId {get;set;} 
+		@auraEnabled public List<Operators> operators {get;set;} 
+		@auraEnabled public List<PicklistVals> picklistVals {get;set;} 
+		@auraEnabled public String dataType {get;set;} 
+		@auraEnabled public String filterDate {get;set;} 
+		@auraEnabled public Integer index {get;set;} 
+		@auraEnabled public Integer lineNumber {get;set;} 
+		@auraEnabled public Boolean dispAdd {get;set;} 
+		@auraEnabled public Boolean dispRem {get;set;} 
+    }
+
+	public class PicklistVals {
+		@auraEnabled public String label {get;set;} 
+		@auraEnabled public String value {get;set;} 
+    }
+
+	public class Scheduler {
+		public String sObj {get;set;} 
+		public List<FilterWrapper> filter {get;set;} 
+		public List<ActionWrap> actionwrap {get;set;} 
+    }
+
     public class SelectOption {
         public SelectOption(String value, String label) {
             this.value = value;
