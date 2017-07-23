@@ -1,4 +1,4 @@
-<aura:component implements="flexipage:availableForAllPageTypes,force:appHostable" access="global" controller="AdhocLightningScheduler">
+<aura:component implements="lightning:actionOverride,force:hasRecordId,flexipage:availableForAllPageTypes,force:appHostable" access="global" controller="AdhocLightningScheduler">
 	<ltng:require styles="{!$Resource.SLDS214 + '/assets/styles/salesforce-lightning-design-system.css'}"/>
     <aura:attribute name="objects" type="Object[]" />
     <aura:attribute name="childObjects" type="Object[]" />
@@ -16,6 +16,7 @@
     <aura:attribute name="filterDate" type="Date" />
     <aura:attribute name="actionTrigger" type="Boolean" />
     <aura:attribute name="actionEvent" type="Boolean" />
+    <aura:attribute name="recordId" type="Id" />
     <aura:handler name="init" action="{!c.myAction}" value="{!this}" />
     <aura:handler name="getPicklistValues" event="c:AddFilters" action="{!c.getValues}"/>
     <aura:handler name="getRelObjs" event="c:AddFilters" action="{!c.getRelatedObjs}"/>

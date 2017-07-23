@@ -1,7 +1,11 @@
 ({
 	myAction : function(component, event, helper) {
-        helper.objectMethod(component,event);
-        helper.hidePanelOnLoad(component,event);
+        if(!$A.util.isEmpty(component.get("v.recordId"))){
+            helper.loadOnEdit(component,event);
+        }else{
+            helper.objectMethod(component,event);
+            helper.hidePanelOnLoad(component,event);
+        }
 	},
 	dispFilter : function(component, event, helper) {
         var selectedObj = component.get("v.selectedObj");

@@ -6,7 +6,7 @@ public class AdhocLightningScheduler{
         //schemaMap = Schema.getGlobalDescribe();
         filWrapList = new List<filterWrapper>();
     }
-    
+
     @auraEnabled
     public static List<SelectOption> getSobjectNames(){
         List<String> oNames = new List<String>();
@@ -197,8 +197,39 @@ public class AdhocLightningScheduler{
         system.debug(schJson);
         Scheduler sch = (Scheduler)JSON.deserialize(schJson, Scheduler.class);
         system.debug(sch);
+        Scheduler__c s = new Scheduler__c();
+        s.Filter_Wrapper_JSON__c = JSON.serialize(sch.filterWrapper);
+        s.Object__c = sch.filterWrapper[0].selectedObject;
+        insert s;
+
+        List<Scheduler_Action__c> saList = new List<Scheduler_Action__c>();
+        for(ActionWrap a: sch.actionWrap){
+            Scheduler_Action__c sa = new Scheduler_Action__c();
+            sa.Action_Wrapper_JSON__c = JSON.serialize(a);
+            sa.Scheduler__c = s.Id;
+            sa.Occurrence__c = a.occurrence;
+            sa.Frequency__c = a.selectedFrequency;
+            sa.Schedule_Datetime__c = a.filterDate;
+            sa.Filter_Wrapper_JSON__c = JSON.serialize(a.filterWrapper);
+            sa.Related_Filter_Wrapper_JSON__c = JSON.serialize(a.relFilterWrapper);
+            sa.Action_Type__c = a.selectedAction;
+            sa.Related_Object__c = a.selectedObject;
+            saList.add(sa);
+        }
+
+        if(!saList.isEmpty()) insert saList;
     }
 
+    @auraEnabled
+    public static String getScheduler(String recId){
+        Scheduler__c sch = [Select Filter_Wrapper_JSON__c,Object__c, 
+                            (Select Action_Wrapper_JSON__c,Occurrence__c,Frequency__c,Schedule_Datetime__c,Filter_Wrapper_JSON__c,Related_Filter_Wrapper_JSON__c,Action_Type__c,Related_Object__c 
+                                            from Scheduler_Actions__r) 
+                            from Scheduler__c where Id= :recId];
+
+        return JSON.serialize(sch);
+    }
+    
 	public class Operators {
 		@auraEnabled public String label {get;set;} 
 		@auraEnabled public String value {get;set;} 
@@ -210,7 +241,7 @@ public class AdhocLightningScheduler{
 		@auraEnabled public Integer lineNumber {get;set;} 
 		@auraEnabled public Integer index {get;set;} 
 		@auraEnabled public String selectedAction {get;set;} 
-		@auraEnabled public String filterDate {get;set;} 
+		@auraEnabled public Datetime filterDate {get;set;}
 		@auraEnabled public String selectedObject {get;set;} 
 		@auraEnabled public Boolean dispRelList {get;set;} 
 		@auraEnabled public Boolean dispRelWrap {get;set;} 
@@ -226,7 +257,7 @@ public class AdhocLightningScheduler{
     }
 
 	public class FilterWrapper {
-		@auraEnabled public String selectedObject {get;set;} 
+		@auraEnabled public String selectedObject {get;set;}
 		@auraEnabled public String triggerAction {get;set;} 
 		@auraEnabled public Integer actionIndex {get;set;} 
 		@auraEnabled public String selectedField {get;set;} 
@@ -249,8 +280,8 @@ public class AdhocLightningScheduler{
     }
 
 	public class Scheduler {
-		public String sObj {get;set;} 
-		public List<FilterWrapper> filter {get;set;} 
+		//public String sObj {get;set;} 
+		public List<FilterWrapper> filterWrapper {get;set;} 
 		public List<ActionWrap> actionwrap {get;set;} 
     }
 

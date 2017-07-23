@@ -25,11 +25,17 @@
             if (component.isValid() && state === "SUCCESS") {
                 var wrap = [];
                 if(act){
-                    actionId['filterWrapper'] = wrap;
+                    if($A.util.isEmpty(component.get("v.recordId"))){
+                        actionId['filterWrapper'] = wrap;
+                    }
                     var index = actionId['index'];
                     var actionWrap = component.get("v.actionWrapper");
                     actionWrap[index] = actionId;
-                }else {component.set("v.filterWrapper",wrap);}
+                }else {
+                    if($A.util.isEmpty(component.get("v.recordId"))){
+                        component.set("v.filterWrapper",wrap);
+                    }
+                }
                 var ret = response.getReturnValue();
                 var options = [];
                 var refOptions = [];
@@ -52,7 +58,9 @@
                     component.set("v.fields", options);
                     component.set("v.refFields", refOptions);
                 }
-                this.createWrapper(component, event);
+                if($A.util.isEmpty(component.get("v.recordId"))){
+                    this.createWrapper(component, event);
+                }
             }
             else if (component.isValid() && state === "INCOMPLETE") {
             
@@ -388,7 +396,7 @@
         var filter = component.get("v.filterWrapper");
         var sObj = component.get("v.selectedObj");
         var schWrapper = {};
-        schWrapper['sObj'] = sObj;
+        //schWrapper['sObj'] = sObj;
         schWrapper['filterWrapper'] = filter;
         schWrapper['actionwrap'] = wrap;
         console.log(wrap);
@@ -396,5 +404,26 @@
         action.setParams({"schJson":JSON.stringify(schWrapper)});
         action.setCallback(this, function(data) {});
         $A.enqueueAction(action);
+    },
+    loadOnEdit : function(component,event) {
+        var action = component.get("c.getScheduler");
+        var schWrapper = {};
+        action.setParams({"recId":component.get("v.recordId")});
+        action.setCallback(this, function(response) {
+            schWrapper = JSON.parse(response.getReturnValue());
+            console.log(schWrapper);
+            component.set("v.selectedObj",schWrapper.Object__c);
+            component.set("v.filterWrapper",JSON.parse(schWrapper.Filter_Wrapper_JSON__c));
+            console.log('#$%#');
+            console.log(JSON.parse(schWrapper.Filter_Wrapper_JSON__c))
+            var actionWrapper = [];
+            schWrapper.Scheduler_Actions__r.records.forEach(function(entry) {
+                actionWrapper.push(JSON.parse(entry.Action_Wrapper_JSON__c));
+            });
+            component.set("v.actionWrapper",actionWrapper);
+            this.objectMethod(component,event);
+            this.fetchFields(component,event);
+        });
+        $A.enqueueAction(action);       
     }
 })

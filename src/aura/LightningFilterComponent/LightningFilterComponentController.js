@@ -4,10 +4,20 @@
         $A.util.addClass(modal,"toggle");
 		var modal1 = component.find("closeButton");
         $A.util.addClass(modal1,"toggle");
-	},
+        //var filter = component.get("v.fw");
+        //filter.selectedField = component.get("v.selectedField");
+        console.log('sf=='+component.get("v.selectedField"));
+    },
+    delay : function(component,event,helper){
+        window.setInterval(this.dispOperator(component,event,helper),1000);
+    },
     dispOperator : function(component, event, helper) {
         var filter = component.get("v.fw");
+        var selectedfield = component.get("v.selectedField");
+        console.log('selectedfield=='+selectedfield);
         var sf = filter['selectedField'];
+        console.log('sfdis=='+sf);
+        console.log(filter);
         var dataType = sf.split('==')[1];
         filter['dataType'] = dataType;
         var opts = [];

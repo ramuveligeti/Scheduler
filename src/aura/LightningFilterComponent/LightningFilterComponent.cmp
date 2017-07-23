@@ -5,6 +5,7 @@
     <aura:attribute name="lookupDialogValues" type="Object[]" />
     <aura:attribute name="fields" type="List" />
     <aura:attribute name="search" type="String" />
+    <aura:attribute name="selectedField" type="String" />
     <aura:attribute name="timer" type="Integer" />
     <aura:registerEvent name="addFilterEvent" type="c:AddFilters"/>
     <aura:registerEvent name="removeFilterEvent" type="c:AddFilters"/>
@@ -22,7 +23,7 @@
             <div class="slds-truncate" title="Field">
                 <ui:inputSelect class="slds-text-title--caps" value="{!v.fw.selectedField}" change="{!c.dispOperator}">
                     <aura:iteration items="{!v.fields}" var="source">
-                        <ui:inputSelectOption text="{!source.value}" label="{!source.label}" />
+                        <ui:inputSelectOption text="{!source.value}" label="{!source.label}" value="{!if(source.value==v.selectedField,v.selectedField,'')}"/>
                     </aura:iteration>
                 </ui:inputSelect>
             </div>

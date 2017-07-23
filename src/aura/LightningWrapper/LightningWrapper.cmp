@@ -51,7 +51,7 @@
                 </thead>
                 <tbody>
                     <aura:iteration items="{!v.filterWrapper}" var="fw">
-                        <c:LightningFilterComponent fw="{!fw}" fields="{!v.fields}" operators="{!fw.operators}"/>
+                        <c:LightningFilterComponent fw="{!fw}" fields="{!v.fields}" selectedField="{!fw.selectedField}" operators="{!fw.operators}"/>
                     </aura:iteration>
                 </tbody>
             </table>
