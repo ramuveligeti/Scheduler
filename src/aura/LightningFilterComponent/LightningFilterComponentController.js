@@ -13,8 +13,6 @@
     },
     dispOperator : function(component, event, helper) {
         var filter = component.get("v.fw");
-        var selectedfield = component.get("v.selectedField");
-        console.log('selectedfield=='+selectedfield);
         var sf = filter['selectedField'];
         console.log('sfdis=='+sf);
         console.log(filter);
