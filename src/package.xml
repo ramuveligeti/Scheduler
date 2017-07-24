@@ -17,30 +17,13 @@
         <name>ApexPage</name>
     </types>
     <types>
+        <members>AddFilters</members>
         <members>LighningScheduler</members>
         <members>LightningAction</members>
         <members>LightningFilterComponent</members>
         <members>LightningLookupModal</members>
         <members>LightningWrapper</members>
         <name>AuraDefinitionBundle</name>
-    </types>
-    <types>
-        <members>Scheduler</members>
-        <name>CustomApplication</name>
-    </types>
-    <types>
-        <members>Scheduler_Action__c</members>
-        <members>Scheduler__c</members>
-        <name>CustomObject</name>
-    </types>
-    <types>
-        <members>Scheduler</members>
-        <members>Scheduler__c</members>
-        <name>CustomTab</name>
-    </types>
-    <types>
-        <members>Metadata</members>
-        <name>RemoteSiteSetting</name>
     </types>
     <types>
         <members>SLDS214</members>

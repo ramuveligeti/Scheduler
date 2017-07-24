@@ -1,0 +1,8 @@
+<aura:event type="APPLICATION" description="Event template">
+    <aura:attribute name="filWrap" type="Object" />
+    <aura:attribute name="actionTrigger" type="String" />
+    <aura:attribute name="selectedOperator" type="String" />
+    <aura:attribute name="selectedValue" type="String" />
+    <aura:attribute name="selectedValueId" type="String" />
+    <aura:attribute name="searchText" type="String" />
+</aura:event>
