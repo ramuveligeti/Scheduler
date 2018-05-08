@@ -376,10 +376,12 @@
         }
     },
     removeActionItem : function(component,event){
-        var act = event.getParam("filWrap");
+        component.destroy();
+        /*var act = event.getParam("filWrap");
+        debugger;
         var index = act['index'];
         var wrap = component.get("v.actionWrapper");
-        wrap.splice(index,1);
+        wrap.splice(index,1); //[0,1,2]
         var cnt =0;
         if(!$A.util.isEmpty(wrap)) {
             console.log('is not')
@@ -387,9 +389,14 @@
                 entry['index'] = cnt;
                 entry['lineNumber'] = cnt+1;
                 cnt++;
+                console.log('cnt=='+entry['index']);
             });
         }
         component.set("v.actionWrapper", wrap);
+        var tabset = component.find("tabset");
+        
+        console.log(tabset.isValid());
+        console.log(tabset.get("v.body"));*/
     },
     saveActions : function(component,event) {
         var wrap = component.get("v.actionWrapper");
@@ -421,9 +428,21 @@
                 actionWrapper.push(JSON.parse(entry.Action_Wrapper_JSON__c));
             });
             component.set("v.actionWrapper",actionWrapper);
+            console.log('actionWrapper');
+            console.log(actionWrapper);
             this.objectMethod(component,event);
             this.fetchFields(component,event);
+            this.getChildRelations(component,event);
+            //this.fetchFields(component,event);
         });
         $A.enqueueAction(action);       
+    },
+    getChildRelations : function(component,event){
+        var action = component.get("c.getChildRelations");
+        action.setParams({"so":component.get("v.selectedObj")});
+        action.setCallback(this, function(data) {
+            component.set("v.childObjects", data.getReturnValue());
+        });
+        $A.enqueueAction(action);
     }
 })

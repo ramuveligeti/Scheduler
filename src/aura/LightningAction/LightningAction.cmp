@@ -1,4 +1,4 @@
-<aura:component >
+<aura:component controller="AdhocLightningScheduler">
     <aura:attribute name="aw" type="Object" />
     <aura:attribute name="actions" type="List" />
     <aura:attribute name="frequency" type="List" />
@@ -15,11 +15,11 @@
     <aura:registerEvent name="getRelFilWrap" type="c:AddFilters"/>
     <aura:registerEvent name="removeActItem" type="c:AddFilters"/>
     
-    <fieldset class="slds-table slds-box slds-theme--default slds-container--large" style="max-width:80%">
-        <legend id="newaccountform" class="slds-text-heading--small slds-p-vertical--x-large" style="margin-bottom:-30px"> Action {!v.aw.lineNumber}</legend>
-        <div style="float:right;margin-top:-40px;margin-right:-27px;margin-left:600px;" onclick="{!c.removeAction}">
+    <fieldset class="slds-table slds-box slds-theme--default slds-container--large" style="max-width:100%">
+        <legend id="newaccountform" class="slds-text-heading--small slds-p-vertical--x-large" style="margin-bottom:-30px"> </legend>
+        <!--div style="float:right;margin-top:-40px;margin-right:-27px;margin-left:600px;" onclick="{!c.removeAction}">
             <lightning:icon iconName="utility:clear" size="small"/>
-        </div>
+        </div>-->
         <thead>
             <tr>
                 <th style="width:10%">Schedule Date time</th>
@@ -88,7 +88,7 @@
         </aura:if>
         <aura:if isTrue="{!and(v.aw.dispRelWrap,v.aw.updateRec)}">
             <aura:if isTrue="{!v.aw.selectedAction=='update_rel'}">
-                <c:LightningWrapper filterWrapper="{!v.relFilterWrapper}" fields="{!v.relFields}" filterName="Filter the records you update based on these conditions " conditions="true"/>
+                <c:LightningWrapper filterWrapper="{!v.relFilterWrapper}" selectedObject="{!v.aw.selectedObject}" fields="{!v.relFields}" filterName="Filter the records you update based on these conditions " conditions="true"/>
             </aura:if>
         </aura:if>
         <aura:if isTrue="{!v.aw.dispRelWrap}">

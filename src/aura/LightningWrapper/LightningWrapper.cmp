@@ -10,6 +10,7 @@
     <aura:attribute name="startId" type="string"/>
     <aura:attribute name="parentId" type="string"/>
     <aura:attribute name="customLogic" type="Boolean" default="false"/>
+    <aura:attribute name="selectedObject" type="String" />
     
     <aura:handler name="init" action="{!c.myAction}" value="{!this}" />
     <article  aura:id="filterBlock" class="slds-card">

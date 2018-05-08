@@ -130,5 +130,39 @@
         }
         console.log(wrap);
         component.set("v.filterWrapper", wrap);
+    },
+    fetchFields: function(component,event,helper){
+        var action = component.get("c.getObjFields");
+        action.setParams({"so":component.get("v.selectedObject")})
+        action.setCallback(this, function(response) {
+            var state = response.getState();
+            if (component.isValid() && state === "SUCCESS") {
+                var ret = response.getReturnValue();
+                var options = [];
+                for (var i = 0; i < ret.length; i++) {
+                    var apiDataTypeWithObjName = ret[i][1];
+                    var apiWithDataType = apiDataTypeWithObjName.split('~:~')[0];
+                    var fieldLabel = ret[i][0];
+                    options.push({ label: fieldLabel, value: apiWithDataType });
+                }
+                
+                component.set("v.fields", options);
+            }
+            else if (component.isValid() && state === "INCOMPLETE") {
+            
+            }
+            else if (component.isValid() && state === "ERROR") {
+                var errors = response.getError();
+                if (errors) {
+                    if (errors[0] && errors[0].message) {
+                        console.log("Error message: " + errors[0].message);
+                    }
+                } else {
+                    console.log("Unknown error");
+                }
+            }
+            
+        });
+        $A.enqueueAction(action);
     }
 })

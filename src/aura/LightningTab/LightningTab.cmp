@@ -1,0 +1,17 @@
+<aura:component >
+    <aura:attribute name="aw" type="Object" />
+    <aura:attribute name="childObjects" type="Object[]" />
+    <aura:attribute name="fields" type="List" />
+    <aura:attribute name="refFields" type="List" />
+    <aura:attribute name="relFields" type="List" />
+    <aura:attribute name="refObjFields" type="List" />
+    <lightning:tab tabindex="{!v.aw.index}">
+        <aura:set attribute="label">
+            <div style="float:right;" onclick="{!c.removeActionItem}">
+                <lightning:icon iconName="utility:delete" size="x-small"/>
+            </div>
+            Action {!v.aw.lineNumber}
+        </aura:set>
+        <c:LightningAction aw="{!v.aw}" actions="{!v.aw.action}" frequency="{!v.aw.frequency}" childObjects="{!v.childObjects}" relFilterWrapper="{!v.aw.relFilterWrapper}" filterWrapper="{!v.aw.filterWrapper}" refObjFields="{!v.refObjFields}" refFields="{!v.refFields}" relFields="{!v.relFields}" fields="{!v.fields}"/>
+    </lightning:tab>
+</aura:component>

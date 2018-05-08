@@ -4945,5 +4945,158 @@
         },
         "DefType": "CONTROLLER",
         "Format": "JS"
+    },
+    {
+        "attributes": {
+            "type": "AuraDefinition",
+            "url": "/services/data/v36.0/tooling/sobjects/AuraDefinition/0Ad280000015styCAA"
+        },
+        "Id": "0Ad280000015styCAA",
+        "AuraDefinitionBundleId": "0Ab28000000QT2YCAW",
+        "AuraDefinitionBundle": {
+            "attributes": {
+                "type": "AuraDefinitionBundle",
+                "url": "/services/data/v36.0/tooling/sobjects/AuraDefinitionBundle/0Ab28000000QT2YCAW"
+            },
+            "DeveloperName": "RecentlyViewedEvent"
+        },
+        "DefType": "EVENT",
+        "Format": "XML"
+    },
+    {
+        "attributes": {
+            "type": "AuraDefinition",
+            "url": "/services/data/v36.0/tooling/sobjects/AuraDefinition/0Ad280000015tw0CAA"
+        },
+        "Id": "0Ad280000015tw0CAA",
+        "AuraDefinitionBundleId": "0Ab28000000QTVBCA4",
+        "AuraDefinitionBundle": {
+            "attributes": {
+                "type": "AuraDefinitionBundle",
+                "url": "/services/data/v36.0/tooling/sobjects/AuraDefinitionBundle/0Ab28000000QTVBCA4"
+            },
+            "DeveloperName": "BMICalculator"
+        },
+        "DefType": "COMPONENT",
+        "Format": "XML"
+    },
+    {
+        "attributes": {
+            "type": "AuraDefinition",
+            "url": "/services/data/v36.0/tooling/sobjects/AuraDefinition/0Ad280000015tw1CAA"
+        },
+        "Id": "0Ad280000015tw1CAA",
+        "AuraDefinitionBundleId": "0Ab28000000QTVBCA4",
+        "AuraDefinitionBundle": {
+            "attributes": {
+                "type": "AuraDefinitionBundle",
+                "url": "/services/data/v36.0/tooling/sobjects/AuraDefinitionBundle/0Ab28000000QTVBCA4"
+            },
+            "DeveloperName": "BMICalculator"
+        },
+        "DefType": "CONTROLLER",
+        "Format": "JS"
+    },
+    {
+        "attributes": {
+            "type": "AuraDefinition",
+            "url": "/services/data/v36.0/tooling/sobjects/AuraDefinition/0Ad280000015tw2CAA"
+        },
+        "Id": "0Ad280000015tw2CAA",
+        "AuraDefinitionBundleId": "0Ab28000000QTVBCA4",
+        "AuraDefinitionBundle": {
+            "attributes": {
+                "type": "AuraDefinitionBundle",
+                "url": "/services/data/v36.0/tooling/sobjects/AuraDefinitionBundle/0Ab28000000QTVBCA4"
+            },
+            "DeveloperName": "BMICalculator"
+        },
+        "DefType": "HELPER",
+        "Format": "JS"
+    },
+    {
+        "attributes": {
+            "type": "AuraDefinition",
+            "url": "/services/data/v36.0/tooling/sobjects/AuraDefinition/0Ad280000015tw3CAA"
+        },
+        "Id": "0Ad280000015tw3CAA",
+        "AuraDefinitionBundleId": "0Ab28000000QTVBCA4",
+        "AuraDefinitionBundle": {
+            "attributes": {
+                "type": "AuraDefinitionBundle",
+                "url": "/services/data/v36.0/tooling/sobjects/AuraDefinitionBundle/0Ab28000000QTVBCA4"
+            },
+            "DeveloperName": "BMICalculator"
+        },
+        "DefType": "STYLE",
+        "Format": "CSS"
+    },
+    {
+        "attributes": {
+            "type": "AuraDefinition",
+            "url": "/services/data/v36.0/tooling/sobjects/AuraDefinition/0Ad280000015tw4CAA"
+        },
+        "Id": "0Ad280000015tw4CAA",
+        "AuraDefinitionBundleId": "0Ab28000000QTVBCA4",
+        "AuraDefinitionBundle": {
+            "attributes": {
+                "type": "AuraDefinitionBundle",
+                "url": "/services/data/v36.0/tooling/sobjects/AuraDefinitionBundle/0Ab28000000QTVBCA4"
+            },
+            "DeveloperName": "BMICalculator"
+        },
+        "DefType": "DESIGN",
+        "Format": "XML"
+    },
+    {
+        "attributes": {
+            "type": "AuraDefinition",
+            "url": "/services/data/v36.0/tooling/sobjects/AuraDefinition/0Ad280000015tw5CAA"
+        },
+        "Id": "0Ad280000015tw5CAA",
+        "AuraDefinitionBundleId": "0Ab28000000QTVBCA4",
+        "AuraDefinitionBundle": {
+            "attributes": {
+                "type": "AuraDefinitionBundle",
+                "url": "/services/data/v36.0/tooling/sobjects/AuraDefinitionBundle/0Ab28000000QTVBCA4"
+            },
+            "DeveloperName": "BMICalculator"
+        },
+        "DefType": "SVG",
+        "Format": "SVG"
+    },
+    {
+        "attributes": {
+            "type": "AuraDefinition",
+            "url": "/services/data/v36.0/tooling/sobjects/AuraDefinition/0Ad280000015uiSCAQ"
+        },
+        "Id": "0Ad280000015uiSCAQ",
+        "AuraDefinitionBundleId": "0Ab28000000QTnUCAW",
+        "AuraDefinitionBundle": {
+            "attributes": {
+                "type": "AuraDefinitionBundle",
+                "url": "/services/data/v36.0/tooling/sobjects/AuraDefinitionBundle/0Ab28000000QTnUCAW"
+            },
+            "DeveloperName": "LightningTab"
+        },
+        "DefType": "CONTROLLER",
+        "Format": "JS"
+    },
+    {
+        "attributes": {
+            "type": "AuraDefinition",
+            "url": "/services/data/v36.0/tooling/sobjects/AuraDefinition/0Ad280000015uiNCAQ"
+        },
+        "Id": "0Ad280000015uiNCAQ",
+        "AuraDefinitionBundleId": "0Ab28000000QTnUCAW",
+        "AuraDefinitionBundle": {
+            "attributes": {
+                "type": "AuraDefinitionBundle",
+                "url": "/services/data/v36.0/tooling/sobjects/AuraDefinitionBundle/0Ab28000000QTnUCAW"
+            },
+            "DeveloperName": "LightningTab"
+        },
+        "DefType": "COMPONENT",
+        "Format": "XML"
     }
 ]

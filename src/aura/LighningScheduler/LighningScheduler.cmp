@@ -53,7 +53,7 @@
     </article>
     <br/>
     <div aura:id="filterBlock">
-        <c:LightningWrapper filterWrapper="{!v.filterWrapper}" fields="{!v.fields}" filterName="Filter records" conditions="true"/>
+        <c:LightningWrapper filterWrapper="{!v.filterWrapper}" selectedObject="{!v.selectedObj}" fields="{!v.fields}" filterName="Filter records" conditions="true"/>
     </div>
 	<br/>
     <article  aura:id="actionsBlock" class="slds-card">
@@ -79,12 +79,14 @@
                 <lightning:button class="slds-button slds-button_brand" label="Add Action" onclick="{!c.addAction}"/>
             </div>
         </div>
-        <div class="slds-card__body slds-card__body_inner" style="margin-top:-20px">
-            <table style="margin-left:10%">
+        <div class="slds-card__body slds-card__body_inner" >
+            <table style="margin-left:10%;width:80%">
                 <aura:if isTrue="{!v.actionWrapper.length >0}">
-                    <aura:iteration items="{!v.actionWrapper}" var="aw">
-                        <c:LightningAction aw="{!aw}" actions="{!aw.action}" frequency="{!aw.frequency}" childObjects="{!v.childObjects}" relFilterWrapper="{!aw.relFilterWrapper}" filterWrapper="{!aw.filterWrapper}" refObjFields="{!v.refObjFields}" refFields="{!v.refFields}" relFields="{!v.relFields}" fields="{!v.fields}"/>
-                    </aura:iteration>
+                    <lightning:tabset aura:id="tabset" variant="scoped" >
+                        <aura:iteration items="{!v.actionWrapper}" var="aw">
+                            <c:LightningTab aw="{!aw}" childObjects="{!v.childObjects}" refObjFields="{!v.refObjFields}" refFields="{!v.refFields}" relFields="{!v.relFields}" fields="{!v.fields}"/>
+                        </aura:iteration>
+                    </lightning:tabset>
                 </aura:if>
             </table>
         </div>

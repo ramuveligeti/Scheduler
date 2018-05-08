@@ -390,5 +390,33 @@
         "manageableState": "unmanaged",
         "type": "ApexClass",
         "mmState": "clean"
+    },
+    "LightningTab/LightningTab.cmp.undefined": {
+        "createdById": "00528000001JBjQAAW",
+        "createdByName": "Ramu Veligeti",
+        "createdDate": "2017-07-29T10:19:38.000Z",
+        "fileName": "unpackaged/aura/LightningTab/LightningTab.cmp",
+        "fullName": "LightningTab/LightningTab.cmp",
+        "id": "0Ad280000015uiNCAQ",
+        "lastModifiedById": "00528000001JBjQAAW",
+        "lastModifiedByName": "Ramu Veligeti",
+        "lastModifiedDate": "2017-07-29T10:19:38.000Z",
+        "manageableState": "unmanaged",
+        "type": "AuraDefinitionBundle",
+        "mmState": "clean"
+    },
+    "LightningTab/LightningTabController.js.undefined": {
+        "createdById": "00528000001JBjQAAW",
+        "createdByName": "Ramu Veligeti",
+        "createdDate": "2017-07-29T10:19:38.000Z",
+        "fileName": "unpackaged/aura/LightningTab/LightningTabController.js",
+        "fullName": "LightningTab/LightningTabController.js",
+        "id": "0Ad280000015uiSCAQ",
+        "lastModifiedById": "00528000001JBjQAAW",
+        "lastModifiedByName": "Ramu Veligeti",
+        "lastModifiedDate": "2017-07-29T10:19:38.000Z",
+        "manageableState": "unmanaged",
+        "type": "AuraDefinitionBundle",
+        "mmState": "clean"
     }
 }

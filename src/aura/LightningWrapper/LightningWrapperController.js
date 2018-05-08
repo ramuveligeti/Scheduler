@@ -1,6 +1,8 @@
 ({
 	myAction : function(component, event, helper) {
-
+        if(!$A.util.isEmpty(component.get("v.selectedObject"))){
+            helper.fetchFields(component,event);
+        }
     },
     removeLine : function(component, event, helper) {
         var filter = event.getParam("filWrap");
